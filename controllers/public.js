@@ -13,11 +13,7 @@ exports.getFacts = (req, res, next) => {
   
   res.send(facts[randomInt(0, facts.length)]);
 }
-exports.getStats = (req, res, next) => {
-  const message = {
-    numFacts: facts.length,
-    createdBy: "Matthew Gruman"
-  }
-  res.send(message)
+
+exports.getAll = (req, res, next) => {
+  res.send(facts)
 }
-  
