@@ -11,7 +11,12 @@ function randomInt(min, max) {
 
 exports.getFacts = (req, res, next) => {
   
-  res.send(facts[randomInt(0, facts.length)]);
+  return(facts[randomInt(0, facts.length)]);
+}
+
+exports.getFact = (req, res, next) => {
+  
+  res.json(facts[randomInt(0, facts.length)]);
 }
 
 exports.getAll = (req, res, next) => {

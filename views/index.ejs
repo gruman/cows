@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cow Facts</title>
+  <meta
+    name="description"
+    content="The only Cow Industry-verified source of cow facts"
+  />
+
+  <link rel="stylesheet" href="/css/styles.css">
+  <meta name="keywords" content="random, api, node, express, ejs, cow, cows, facts">
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MRJ7D0KSPY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MRJ7D0KSPY');
+</script>
+</head>
+<body>
+  <div class="container">
+    <img src="/img/cow.png" style="width: 150px; margin-bottom: 2rem" />
+  <h1>Cow Facts</h1>
+    <p style="margin-bottom: 2rem;">by <a href="https://gruman.co">Matthew Gruman</a></p>
+    <div class="card">
+      <%
+  // Generate a random integer between 1 and 9999
+  const randomInt = Math.floor(Math.random() * 9999) + 1;
+%>
+    <h3>Cow Fact #<%= randomInt %></h3>
+    <p><%= fact %></p>
+    </div>
+    <button onclick="reloadFact()">Another Fact</button>
+    <p>
+      <a href="https://matthew-gruman.myspreadshop.ca">Buy the shirt</a>.</p>
+</div>
+</body>
+<script>
+  // Function to reload the fact
+  async function reloadFact() {
+    const randomInt = Math.floor(Math.random() * 9999) + 1;
+    try {
+      const response = await fetch('http://localhost:8080/getFact'); // Replace with the actual server endpoint
+      const data = await response.json();
+      console.log(data)
+      // Update the random number and fact in the DOM
+      document.querySelector('.card h3').innerText = `Cow Fact #${randomInt}`;
+      document.querySelector('.card p').innerText = data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  </script>
+</html>
